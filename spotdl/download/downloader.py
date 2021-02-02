@@ -71,7 +71,7 @@ class DownloadManager():
         self.displayManager.reset()
         self.displayManager.set_song_count_to(1)
 
-        self._download_asynchronously([songObj])
+        return self._download_asynchronously([songObj])
 
     def download_multiple_songs(self, songObjList: List[SongObj]) -> None:
         '''
@@ -88,7 +88,7 @@ class DownloadManager():
         self.displayManager.reset()
         self.displayManager.set_song_count_to(len(songObjList))
 
-        self._download_asynchronously(songObjList)
+        return self._download_asynchronously(songObjList)
 
     def resume_download_from_tracking_file(self, trackingFilePath: str) -> None:
         '''
@@ -107,7 +107,7 @@ class DownloadManager():
         self.displayManager.reset()
         self.displayManager.set_song_count_to(len(songObjList))
 
-        self._download_asynchronously(songObjList)
+        return self._download_asynchronously(songObjList)
 
     async def download_song(self, songObj: SongObj) -> None:
         '''
@@ -256,6 +256,7 @@ class DownloadManager():
         # delete the unnecessary YouTube download File
         if downloadedFilePath and downloadedFilePath.is_file():
             downloadedFilePath.unlink()
+        return convertedFilePath
 
     def set_id3_data(self, convertedFilePath, songObj):
         # embed song details
@@ -352,4 +353,4 @@ class DownloadManager():
     def _download_asynchronously(self, song_obj_list):
         tasks = [self._pool_download(song) for song in song_obj_list]
         # call all task asynchronously, and wait until all are finished
-        self.loop.run_until_complete(asyncio.gather(*tasks))
+        return self.loop.run_until_complete(asyncio.gather(*tasks))
