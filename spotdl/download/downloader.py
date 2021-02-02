@@ -165,7 +165,7 @@ class DownloadManager():
 
             #! None is the default return value of all functions, we just explicitly define
             #! it here as a continent way to avoid executing the rest of the function.
-            return None
+            return convertedFilePath
 
         # download Audio from YouTube
         if self.displayManager:
