@@ -158,8 +158,8 @@ class DownloadManager():
 
         # if a song is already downloaded skip it
         if convertedFilePath.is_file():
-            if self.displayManager:
-                self.displayManager.notify_download_skip()
+            # if self.displayManager:
+            #    self.displayManager.notify_download_skip()
             if self.downloadTracker:
                 self.downloadTracker.notify_download_completion(songObj)
 
@@ -168,7 +168,7 @@ class DownloadManager():
             return convertedFilePath
 
         # download Audio from YouTube
-        if self.displayManager:
+        if False:  # self.displayManager:
             youtubeHandler = YouTube(
                 url=songObj.get_youtube_link(),
                 on_progress_callback=self.displayManager.pytube_progress_hook
@@ -241,14 +241,14 @@ class DownloadManager():
             if convertedFilePath.is_file():
                 break
 
-        if self.displayManager:
-            self.displayManager.notify_conversion_completion()
+        # if self.displayManager:
+        #    self.displayManager.notify_conversion_completion()
 
         self.set_id3_data(convertedFilePath, songObj)
 
         # Do the necessary cleanup
-        if self.displayManager:
-            self.displayManager.notify_download_completion()
+        # if self.displayManager:
+        #    self.displayManager.notify_download_completion()
 
         if self.downloadTracker:
             self.downloadTracker.notify_download_completion(songObj)
